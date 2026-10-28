@@ -72,6 +72,16 @@ def main():
     site=runtime/'Lib/site-packages'
     subprocess.run(['uv','pip','install','--target',str(site),'--python-version','3.12','--only-binary',':all:','--torch-backend','cpu','-r',str(SOURCE/'requirements-windows.lock')],check=True)
     for dll in (site/'PySide6').glob('msvcp*.dll'):shutil.copy2(dll,runtime/dll.name)
+    # PyTorch's current Windows build also needs VCRUNTIME140_THREADS. A developer
+    # runner has it on PATH, but a clean PC may not; use Microsoft's app-local CRT.
+    redist=Path(os.environ.get('VCToolsRedistDir',''))
+    crt=list(redist.glob('x64/Microsoft.VC*.CRT/*.dll'))
+    if not any(p.name.lower()=='vcruntime140_threads.dll' for p in crt):
+        raise RuntimeError('The current x64 MSVC redistributable, including vcruntime140_threads.dll, is required to build a self-contained app.')
+    for dll in crt:shutil.copy2(dll,runtime/dll.name)
+    # The samplerate universal wheel carries platform alternatives; Windows uses .dll.
+    for pattern in ['*.dylib','*.so']:
+        for p in (site/'samplerate/_samplerate_data').glob(pattern):p.unlink()
     for folder in ['Backend','UI','Licenses']:shutil.copytree(SOURCE/folder,RES/folder,dirs_exist_ok=True,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
     (RES/'Tests').mkdir(exist_ok=True);shutil.copy2(SOURCE/'engine_check.py',RES/'Tests/engine_check.py')
     # Weight stripping runs with the newly assembled Windows Python and its dependencies.
@@ -84,7 +94,7 @@ def main():
     shutil.copy2(SOURCE/'FRIEND TEST CHECKLIST.txt',PACKAGE/'FRIEND TEST CHECKLIST.txt')
     if (SOURCE/'icon.png').exists():shutil.copy2(SOURCE/'icon.png',RES/'icon.png')
     shutil.copy2(SOURCE/'requirements-windows.lock',RES/'requirements-windows.lock')
-    (RES/'provenance.json').write_text(json.dumps({'build':'Windows x64 test 2.1.0-beta.1','downloads':inputs},indent=2),encoding='utf-8')
+    (RES/'provenance.json').write_text(json.dumps({'build':'Windows x64 test 2.1.0-beta.1','downloads':inputs,'msvc_redistributable':{'version':os.environ.get('VCToolsVersion'),'files':{p.name:digest(p) for p in crt}}},indent=2),encoding='utf-8')
     print('Windows package ready:',PACKAGE,flush=True)
 
 if __name__=='__main__':

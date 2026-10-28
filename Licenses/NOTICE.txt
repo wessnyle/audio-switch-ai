@@ -17,3 +17,7 @@ PyTorch. Vocal, lead, reverb, four-stem and RNNoise model attribution, source
 revision, checksums, and model cards remain under Models. Model licenses are
 MIT, GPL-3.0, Apache-2.0 and the RNNoise authors' declaration as appropriate.
 No paid or cloud inference service is used; no affiliation/endorsement implied.
+
+Microsoft Visual C++ runtime DLLs are distributed app-locally from the Visual
+Studio x64 Redistributable directory. Versions and file hashes are recorded
+in provenance.json. Microsoft retains its copyrights in those DLLs.

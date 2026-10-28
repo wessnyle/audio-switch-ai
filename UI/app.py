@@ -57,7 +57,10 @@ def environment():
     env=dict(os.environ)
     env.update(PYTHONUTF8='1',PYTHONIOENCODING='utf-8',PYTHONDONTWRITEBYTECODE='1',OMP_NUM_THREADS='8',
         NUMBA_CACHE_DIR=str(DATA/'Cache/numba'),PYTORCH_ENABLE_MPS_FALLBACK='1')
-    env['PATH']=str(RES/'Tools/bin')+os.pathsep+env.get('PATH','')
+    if os.name=='nt':
+        system=Path(os.environ.get('SystemRoot',r'C:\Windows'))
+        env['PATH']=os.pathsep.join(map(str,[RES/'Tools/bin',RES/'Runtime',system/'System32',system]))
+    else:env['PATH']=str(RES/'Tools/bin')+os.pathsep+env.get('PATH','')
     return env
 
 class Worker(QThread):

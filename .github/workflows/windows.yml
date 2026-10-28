@@ -29,18 +29,21 @@ jobs:
         shell: pwsh
         run: |
           $res = 'build/Audio Switch AI Windows Test/Resources'
+          $env:PATH = "$PWD/$res/Runtime;$PWD/$res/Tools/bin;$env:SystemRoot/System32;$env:SystemRoot"
           & "$res/Runtime/python.exe" -I -X utf8 engine_check.py --resources $res --ai 2>&1 | Tee-Object -FilePath build/engine-check.log
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Exercise interface to worker preview bridge
         shell: pwsh
         run: |
           $res = 'build/Audio Switch AI Windows Test/Resources'
+          $env:PATH = "$PWD/$res/Runtime;$PWD/$res/Tools/bin;$env:SystemRoot/System32;$env:SystemRoot"
           & "$res/Runtime/python.exe" -I -X utf8 ui_bridge_check.py --resources $res 2>&1 | Tee-Object -FilePath build/ui-check.log
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Verify native launcher and per-user installer
         shell: pwsh
         run: |
           $res = 'build/Audio Switch AI Windows Test/Resources'
+          $env:PATH = "$PWD/$res/Runtime;$PWD/$res/Tools/bin;$env:SystemRoot/System32;$env:SystemRoot"
           & "$res/Runtime/python.exe" -I -X utf8 install_check.py --resources $res 2>&1 | Tee-Object -FilePath build/install-check.log
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Include source and create friend-test ZIP
