@@ -68,7 +68,12 @@ def powershell(script,wait=True):
     else:subprocess.Popen(args,creationflags=subprocess.CREATE_NO_WINDOW|subprocess.DETACHED_PROCESS)
 
 def shortcut_paths():
-    return [Path(os.environ['APPDATA'])/'Microsoft/Windows/Start Menu/Programs/Audio Switch AI.lnk',Path(os.environ['USERPROFILE'])/'Desktop/Audio Switch AI.lnk']
+    import ctypes
+    # Respect Windows' redirected / OneDrive Desktop rather than assuming USERPROFILE\Desktop.
+    desktop=ctypes.create_unicode_buffer(32768)
+    result=ctypes.windll.shell32.SHGetFolderPathW(None,0x10,None,0,desktop)
+    if result!=0:raise OSError('Windows could not locate the Desktop folder.')
+    return [Path(os.environ['APPDATA'])/'Microsoft/Windows/Start Menu/Programs/Audio Switch AI.lnk',Path(desktop.value)/'Audio Switch AI.lnk']
 
 def register_install(root):
     import winreg

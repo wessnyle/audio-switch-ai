@@ -77,7 +77,8 @@ def main():
     # Weight stripping runs with the newly assembled Windows Python and its dependencies.
     subprocess.run([str(runtime/'python.exe'),'-I','-X','utf8',str(SOURCE/'build_windows.py'),'--models-only'],check=True)
     exe=PACKAGE/'Audio Switch AI.exe'
-    subprocess.run(['cl','/nologo','/O2','/MT','/DUNICODE','/D_UNICODE',str(SOURCE/'launcher.c'),'/Fe:'+str(exe),'/Fo:'+str(BUILD/'launcher.obj'),'/link','/SUBSYSTEM:WINDOWS','shell32.lib','user32.lib'],check=True)
+    subprocess.run(['rc','/nologo','/fo',str(BUILD/'app.res'),str(SOURCE/'app.rc')],check=True,cwd=SOURCE)
+    subprocess.run(['cl','/nologo','/O2','/MT','/DUNICODE','/D_UNICODE',str(SOURCE/'launcher.c'),str(BUILD/'app.res'),'/Fe:'+str(exe),'/Fo:'+str(BUILD/'launcher.obj'),'/link','/SUBSYSTEM:WINDOWS','shell32.lib','user32.lib'],check=True)
     shutil.copy2(exe,PACKAGE/'Setup.exe')
     shutil.copy2(SOURCE/'START HERE.txt',PACKAGE/'START HERE.txt')
     shutil.copy2(SOURCE/'FRIEND TEST CHECKLIST.txt',PACKAGE/'FRIEND TEST CHECKLIST.txt')

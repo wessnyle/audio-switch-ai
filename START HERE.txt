@@ -78,8 +78,8 @@ UNINSTALL
 Close every Audio Switch AI window. Windows Settings > Apps > Installed apps >
 Audio Switch AI (Windows test) > Uninstall. It removes this installed app,
 shortcuts, and right-click entries; your audio files and saved presets remain.
-For an extracted portable copy, remove its right-click entries by installing
-and uninstalling the app, then delete the extracted folder. The Mac apps are
+For an extracted portable copy, click Remove right-click actions in the app,
+close it, then delete the extracted folder. The Mac apps are
 separate and unaffected.
 
 SOURCE / LICENSES

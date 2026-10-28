@@ -174,6 +174,7 @@ class MainWindow(QMainWindow):
         presets,form=self.group('Presets');self.presets=QComboBox();self.presets.addItems(list(PRESETS)+sorted(self.saved));form.addRow(self.presets)
         pbuttons=QHBoxLayout();pbuttons.addWidget(self.button('Apply',self.apply_preset));pbuttons.addWidget(self.button('Save current…',self.save_preset));form.addRow(pbuttons);ll.addWidget(presets)
         self.integration=self.button('Install right-click actions',self.install_context);ll.addWidget(self.integration)
+        self.remove_integration=self.button('Remove right-click actions',self.remove_context);ll.addWidget(self.remove_integration)
         self.diagnostics=self.button('Check audio engine',self.run_diagnostics);ll.addWidget(self.diagnostics)
         ll.addWidget(self.button('Export diagnostic logs…',self.export_logs))
         hint=QLabel('Windows 11: right-click →\nShow more options → Audio Switch AI.\n\nAI separation may take several minutes\non a CPU. Start with Preview 15s.');hint.setStyleSheet('color:#767286;font-size:12px;');hint.setWordWrap(True);ll.addWidget(hint)
@@ -237,7 +238,7 @@ class MainWindow(QMainWindow):
         self.run_button.setEnabled(can);self.preview_button.setEnabled(can and s['action'] not in ['inspect','join','split'] and s['channels']!='split')
         self.original_button.setEnabled(bool(self.preview_original) and not self.busy);self.result_button.setEnabled(bool(self.preview_result) and not self.busy)
         self.stop_button.setEnabled(self.busy and not self.is_diagnostics);self.show_button.setEnabled(bool(self.outputs))
-        for w in [self.add_button,self.clear_button,self.up,self.down,self.remove_button,self.presets,self.integration,self.diagnostics,*self.controls.values()]:w.setEnabled(not self.busy)
+        for w in [self.add_button,self.clear_button,self.up,self.down,self.remove_button,self.presets,self.integration,self.remove_integration,self.diagnostics,*self.controls.values()]:w.setEnabled(not self.busy)
     def choose_files(self):
         names,_=QFileDialog.getOpenFileNames(self,'Choose audio or video files','','Audio / video (*.wav *.wave *.aif *.aiff *.aifc *.flac *.m4a *.mp3 *.caf *.ogg *.opus *.wma *.aac *.mp4 *.mov *.mkv *.avi *.webm);;All files (*)')
         self.add_files(names)
@@ -282,6 +283,12 @@ class MainWindow(QMainWindow):
             from windows_integration import install_context
             install_context(ROOT/'Audio Switch AI.exe');self.message.setText('Installed. Right-click an audio file → Show more options → Audio Switch AI.')
         except Exception as error:QMessageBox.critical(self,'Could not install actions',str(error))
+    def remove_context(self):
+        if os.name!='nt':return
+        try:
+            from windows_integration import remove_context
+            remove_context(ROOT/'Audio Switch AI.exe');self.message.setText('Removed this copy’s right-click actions. Your audio files are unchanged.')
+        except Exception as error:QMessageBox.critical(self,'Could not remove actions',str(error))
     def run(self,preview=False):
         if self.busy or not self.paths:return
         self.clear_preview();self.failed=0;self.is_preview=preview;self.is_diagnostics=False;self.busy=True
@@ -407,6 +414,7 @@ def main():
             assert window.settings()==quick_settings(args.quick_action)
             assert len(window.controls)==len(DEFAULTS)
             window.grab().save(args.ui_smoke)
+            Path(args.ui_smoke).with_suffix('.json').write_text(json.dumps({'settings':window.settings(),'files':[str(p) for p in window.paths]},ensure_ascii=False),encoding='utf-8')
             app.quit()
         QTimer.singleShot(500,smoke)
     return app.exec()
