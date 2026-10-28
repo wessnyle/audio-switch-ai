@@ -10,6 +10,7 @@ from app import QApplication,CopyInstall
 from windows_integration import shortcut_paths,unregister_install,EXTENSIONS,registry_commands
 import winreg
 application=QApplication([])
+assert application.platformName()=='windows','Test the real Windows display backend'
 with tempfile.TemporaryDirectory(prefix='AudioSwitchAI-install-test-') as name:
     root=Path(name)
     # Exercise Unicode, apostrophes, ampersands and a trailing-space-free path through C quoting.

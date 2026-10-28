@@ -9,6 +9,7 @@ import soundfile as sf
 from app import QApplication,MainWindow,STYLE,QTimer
 
 application=QApplication([]);application.setStyle('Fusion');application.setStyleSheet(STYLE)
+if os.name=='nt':assert application.platformName()=='windows','Test the real Windows display backend'
 with tempfile.TemporaryDirectory(prefix='AudioSwitchAI-ui-bridge-') as name:
     root=Path(name);path=root/'UI test café.wav';rate=48000;t=np.arange(rate)/rate
     sf.write(path,np.stack([.2*np.sin(2*np.pi*440*t)]*2,axis=1),rate,subtype='PCM_24')
