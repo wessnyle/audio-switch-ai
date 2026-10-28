@@ -1,0 +1,9 @@
+{
+  "name": "lead",
+  "repository": "https://huggingface.co/anvuew/karaoke_bs_roformer",
+  "revision": "0d4423d42e12cf2ba39ae09171028507b8a2a7be",
+  "license": "gpl-3.0",
+  "filename": "karaoke_bs_roformer_anvuew.ckpt",
+  "sha256": "206d04757cb5f75ca3b55f8a0a48f5c26aa2351d4ff3c7adbfc9affa30ea3ae4",
+  "bytes": 204486925
+}

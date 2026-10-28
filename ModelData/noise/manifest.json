@@ -1,0 +1,16 @@
+{
+  "repository": "https://github.com/richardpl/arnndn-models",
+  "revision": "0fda24c46d78f0207d820bb970fbe85c1971b39c",
+  "files": [
+    {
+      "filename": "bd.rnnn",
+      "sha256": "ae3f7411e1e6a884f839a4a145c394408398f09854dbc1216ee02faafc98a17b",
+      "bytes": 299693
+    },
+    {
+      "filename": "mp.rnnn",
+      "sha256": "4e84a448a4baf937992aaf4d10c8258007ec5d24219b6647dfd5fb4b563ad231",
+      "bytes": 296861
+    }
+  ]
+}

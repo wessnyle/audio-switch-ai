@@ -1,0 +1,19 @@
+Audio Switch AI Windows test edition — third-party notices
+
+App, interface, launcher and worker: GPL-3.0-or-later; full source supplied.
+Qt for Python / PySide6 Essentials and Shiboken are dynamically loaded; their
+license files remain in Runtime/Lib/site-packages. Qt is used under the
+available LGPL/GPL terms. No dependency is installed system-wide.
+
+Embedded CPython 3.12.10 is from python.org. Its license is in Runtime/LICENSE.txt.
+FFmpeg/ffprobe Windows GPL builds are from BtbN (linked by ffmpeg.org); original
+source: https://github.com/BtbN/FFmpeg-Builds and https://github.com/FFmpeg/FFmpeg.
+Exact binary URLs and SHA-256 are in provenance.json and Source/binary-inputs.json.
+
+Audio separator 0.47.1 (MIT), SCNet source (MIT), PyTorch and runtime libraries
+retain their licenses and metadata in Runtime/Lib/site-packages. Exact package
+versions are recorded in requirements-windows.lock. This edition bundles CPU
+PyTorch. Vocal, lead, reverb, four-stem and RNNoise model attribution, source
+revision, checksums, and model cards remain under Models. Model licenses are
+MIT, GPL-3.0, Apache-2.0 and the RNNoise authors' declaration as appropriate.
+No paid or cloud inference service is used; no affiliation/endorsement implied.

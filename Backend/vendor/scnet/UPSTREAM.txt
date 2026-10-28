@@ -1,0 +1,3 @@
+https://github.com/ZFTurbo/Music-Source-Separation-Training
+Commit 6fdad13686bb7e84d029ec66f9dbe76e65c93ebf
+Files models/scnet/scnet.py and separation.py; unmodified.

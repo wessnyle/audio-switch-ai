@@ -1,0 +1,92 @@
+Audio Switch AI — WINDOWS TEST BUILD 2.1.0-beta.1
+
+This is the Windows test edition. It includes the same audio operations and
+AI models as the Mac app, with a Windows interface and Explorer integration.
+This first Windows package needs real-world testing before wider sharing.
+
+REQUIREMENTS
+Windows 11, 64-bit Intel/AMD PC (x64). This edition uses CPU processing;
+an NVIDIA graphics card is not required and is not used by this build.
+16 GB RAM minimum recommended; 32 GB is preferable for AI separation.
+Allow at least 8 GB free while extracting/installing. The installed app uses
+roughly 3.5 GB. Keep more space free for source audio and output copies.
+Windows ARM devices have not been validated for this build.
+
+INSTALL
+1. Download the complete ZIP to a local drive.
+2. Right-click the ZIP > Extract All. Wait for extraction to finish.
+   Do not run the app from inside the ZIP.
+3. Open the extracted folder and double-click Setup.exe.
+4. Click Install Audio Switch AI. It installs for your Windows account under
+   %LOCALAPPDATA%\Programs\Audio Switch AI and adds Start Menu/Desktop shortcuts.
+   No administrator password, separate Python, paid service, or AI download
+   is required. All processing dependencies and weights are already included.
+5. Open the app and click Check audio engine. Results should end with
+   ALL ENGINE CHECKS PASSED. Then follow FRIEND TEST CHECKLIST.txt.
+
+This personal test build is unsigned. Windows may show an unknown-publisher
+or SmartScreen prompt. Only run the copy you received from the person who
+provided it; More info > Run anyway may be offered. Do not disable Windows
+security. If your organization's policy blocks it, send a screenshot instead.
+
+You can also run Audio Switch AI.exe directly from the extracted folder.
+Keep Resources beside it. Click Install right-click actions if using it this
+way, and keep the folder in its final location so those commands can find it.
+
+RIGHT-CLICK COMMANDS
+Right-click a supported audio/video file > Show more options > Audio Switch AI.
+Commands: Process Audio with AI, Extract Vocals (AI), Reduce Reverb (AI),
+Remove Noise (AI), Convert to WAV, and Change Sample Rate.
+These open the app with the file and relevant settings. Click Preview 15s or
+Process files to run. Change Sample Rate opens the conversion controls;
+choose the rate on the Output tab. Right-click commands apply to one file;
+use Add files or drag multiple files into the app for batch processing.
+
+USE
+Add or drag in files. Choose the action, set Processing / Output options,
+and preview a short section before processing a full song. New copies save
+in the original folder, with changes in the filename. Originals are protected.
+Duplicate names receive _2, _3, etc. Join files follows the list order and
+saves next to the first file. AI work may take minutes on a CPU.
+
+All Mac edition actions are available: vocals, experimental lead vocals,
+instrumental, four stems, reverb and noise reduction, click/clipping repair,
+de-essing, hum/rumble filtering, channels, gain, peak/LUFS normalization,
+silence trim, fades, pitch, tempo, reverse, excerpt, split/join, video audio
+extraction, audio inspection, and estimated tempo/key. Presets can be saved.
+Export: WAV, AIFF, CAF, FLAC, AAC, Apple Lossless, MP3, Vorbis, Opus.
+
+Preview playback uses a 16-bit WAV, so it can play with Windows' audio system.
+Final files use your selected output format, rate, and depth. Stereo/mono
+AI processing uses 44.1 kHz internally. Opus requires 48 kHz; MP3 up to 48 kHz.
+Lead vocal separation is experimental. AI cleanup can leave artifacts.
+Transcription and automatic pitch correction are not included.
+
+STOP / TROUBLESHOOTING
+Stop requests safe cancellation after the current model step. Loading a large
+model may take a little time to finish before cancellation is acknowledged.
+Avoid force-closing while files are being written. A force quit can leave a
+temporary .AudioSwitchAI-* folder beside the input; completed copies remain.
+
+If a test fails, click Export diagnostic logs and send that ZIP plus a
+screenshot and the step that failed. Logs can contain filenames/paths;
+review them if needed. They contain no audio. Nothing is uploaded by the app.
+If the interface cannot start, details may be in:
+%LOCALAPPDATA%\Audio Switch AI\Logs\application.log
+
+UNINSTALL
+Close every Audio Switch AI window. Windows Settings > Apps > Installed apps >
+Audio Switch AI (Windows test) > Uninstall. It removes this installed app,
+shortcuts, and right-click entries; your audio files and saved presets remain.
+For an extracted portable copy, remove its right-click entries by installing
+and uninstalling the app, then delete the extracted folder. The Mac apps are
+separate and unaffected.
+
+SOURCE / LICENSES
+App source is GPL-3.0-or-later and is included in Source, with notices retained.
+The same source/build workflow is at https://github.com/wessnyle/audio-switch-ai
+Bundled model manifests, licenses, and pinned binary provenance are under
+Resources. Python package licenses are retained under Runtime/Lib/site-packages.
+Qt for Python uses PySide6 Essentials with its bundled license notices;
+no system-wide Python or Qt installation is made. FFmpeg is a separately
+executed GPL-enabled Windows binary from BtbN, linked by ffmpeg.org.

@@ -1,0 +1,9 @@
+{
+  "name": "dereverb",
+  "repository": "https://huggingface.co/anvuew/dereverb_bs_roformer",
+  "revision": "bd5c6b55a429b4b74ce85fe5dcb690cfe36d91ec",
+  "license": "gpl-3.0",
+  "filename": "dereverb_bs_roformer_anvuew_sdr_22.5050.ckpt",
+  "sha256": "b4dfa4c4aa251c0afc303e5d512d904a1c2255e51d8d0dbfbddb18d740563d42",
+  "bytes": 204496717
+}

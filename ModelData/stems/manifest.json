@@ -1,0 +1,12 @@
+{
+  "name": "stems",
+  "repository": "https://huggingface.co/Aname-Tommy/Huge-SCNet-4stems",
+  "revision": "1d9ae5091dad91ae675667505d6ed664a70fc168",
+  "license": "apache-2.0",
+  "filename": "weights.pt",
+  "sha256": "3e4d5713b03bf7bb9c25b32d9c72e1aff93bddde3e1b05cbbe77574f21923ece",
+  "bytes": 261345019,
+  "original_filename": "huge_scnet_4stems_bleedless.ckpt",
+  "original_sha256": "9c4a00f4dd9517402d41bfc7e95f544c5f65c805e5106bbd21263a683d649d28",
+  "modification": "Training-only optimizer/scheduler metadata discarded; model tensors unchanged."
+}

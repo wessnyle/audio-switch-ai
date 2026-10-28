@@ -1,0 +1,10 @@
+{
+  "name": "vocals",
+  "repository": "https://huggingface.co/KimberleyJSN/melbandroformer",
+  "revision": "ac9b0614ab3cd7f77219e18ba494dfd93956c348",
+  "license": "mit",
+  "filename": "MelBandRoformer.ckpt",
+  "sha256": "87201f4d31afb5bc79993230fc49446918425574db48c01c405e44f365c7559e",
+  "bytes": 913106900,
+  "config_source": "https://raw.githubusercontent.com/TRvlvr/application_data/main/mdx_model_data/mdx_c_configs/config_vocals_mel_band_roformer_kim.yaml"
+}

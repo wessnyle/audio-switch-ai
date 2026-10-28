@@ -1,0 +1,61 @@
+name: Windows build and audio checks
+on:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-2025
+    timeout-minutes: 60
+    env:
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: utf-8
+      OMP_NUM_THREADS: '4'
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+      - name: Install build resolver
+        run: python -m pip install uv
+      - name: Build private Windows runtime, app, and models
+        run: python build_windows.py
+      - name: Measure processing and exercise every bundled AI model
+        shell: pwsh
+        run: |
+          $res = 'build/Audio Switch AI Windows Test/Resources'
+          & "$res/Runtime/python.exe" -I -X utf8 engine_check.py --resources $res --ai 2>&1 | Tee-Object -FilePath build/engine-check.log
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Exercise interface to worker preview bridge
+        shell: pwsh
+        run: |
+          $res = 'build/Audio Switch AI Windows Test/Resources'
+          & "$res/Runtime/python.exe" -I -X utf8 ui_bridge_check.py --resources $res 2>&1 | Tee-Object -FilePath build/ui-check.log
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Include source and create friend-test ZIP
+        shell: pwsh
+        run: |
+          python package.py
+      - name: Save installer ZIP
+        uses: actions/upload-artifact@v7
+        with:
+          name: Audio-Switch-AI-Windows-Test
+          path: build/Audio Switch AI Windows Test.zip
+          compression-level: 0
+          retention-days: 14
+      - name: Save checks and interface render
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: Windows-check-results
+          path: |
+            build/*.log
+            build/*.png
+            build/Audio Switch AI Windows Test/windows-preview-ui.png
+          if-no-files-found: ignore
+          retention-days: 14

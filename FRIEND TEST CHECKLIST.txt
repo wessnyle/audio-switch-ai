@@ -1,0 +1,35 @@
+Audio Switch AI — first Windows test
+
+Start with disposable copies of two short audio files (ideally stereo WAV,
+one with music/vocals and one with room noise). Use a local writable folder.
+Do not start with a whole music library. This is a first Windows test build.
+
+[ ] Extract the ZIP, run Setup.exe, and open the installed shortcut.
+[ ] Click Check audio engine. Results end with ALL ENGINE CHECKS PASSED.
+[ ] Right-click a WAV > Show more options > Audio Switch AI > Convert to WAV.
+    The app opens with the file. Process it. A labeled copy appears beside it.
+[ ] Convert a file to 48 kHz / 24-bit WAV. Inspect it and confirm the rate/depth.
+[ ] Run the same conversion again: another numbered copy appears.
+[ ] Confirm the original file still plays and has not changed.
+[ ] Choose a file with spaces or punctuation in its name; conversion works.
+[ ] Add both files to the app. Both process and save alongside their originals.
+[ ] Preview 15s with Remove Noise enabled. Play original/result; compare them.
+[ ] Preview 15s with Extract vocals. Confirm a vocal output plays. CPU AI
+    processing may take several minutes; record the approximate time.
+[ ] Preview 15s with Reduce Reverb. Play the result.
+[ ] Try Separate vocals, drums, bass & other on a short clip: four files save.
+[ ] Start an AI operation and click Stop; the app eventually stops cleanly.
+[ ] Save a preset, close/reopen the app, and confirm the preset remains.
+[ ] Uninstall through Settings > Apps; shortcuts and right-click entries vanish.
+
+For any failure: note the step, error, Windows version, CPU, installed RAM,
+and approximate input duration/format. Export diagnostic logs from the app.
+Logs may include file names/paths; no audio is included. Send the logs and a
+screenshot back to the person who gave you this test package.
+
+Test PC / RAM:
+Windows version:
+Engine check result:
+Vocal preview time:
+Reverb preview time:
+Problems / comments:
